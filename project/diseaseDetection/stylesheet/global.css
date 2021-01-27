@@ -1,0 +1,11 @@
+html{
+    font: 65.2%;
+    height:100%
+}
+body{
+    font: helvetica, roboto;
+}
+
+.primary{
+    background-color:#89d1fe;
+}

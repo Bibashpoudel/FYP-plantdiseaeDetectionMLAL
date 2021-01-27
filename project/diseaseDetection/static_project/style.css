@@ -1,0 +1,19 @@
+body{
+    background: #a1a1a1 !important;
+    margin-top:10px;
+}
+
+.nav{
+    border-radius: 0px !important;
+    background-color:#232f3e !important;
+    
+}
+
+
+/* for update form in my profile page */
+
+        
+        
+.mymodal{
+    height:300px !important;
+}

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block title %}
+Post
+
+{% endblock title %}
+{% block content%}
+
+<div class="ui grid " style="margin-top:10px;">
+    
+    <div class="row">
+        <div class="ten wide column ">
+            
+            {% for obj in ps %}
+
+
+            <div class="ui fluid card">
+                <div class="content">
+                    <div class="right floated meta">
+                        <div class="ui grid">
+                            
+                                <i class="ellipsis vertical icon display-menu "></i>
+                            
+                            <div class="content-menu">
+                                {% ifequal request.user obj.author.user %}
+                                    <a href="{% url 'posts:post-delete' obj.pk %}"><button class="ui button bwhitelg">delete</button></a>
+                                    <a href="{% url 'posts:post-update' obj.pk %}"><button class="ui button bwhitelg">update</button></a>
+
+                                {%endifequal%}
+                                <span class="post_hide"> remove the post</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <img class="ui avatar image" src="{{obj.author.avatar.url}}" alt="">
+                    {{obj.author.user}}  - {{obj.created|timesince}} ago
+                
+                </div>
+                <div class="content">
+                    <p>{{obj.content}}</p>
+                    
+                    <div class="right floated">
+                        <form action="{% url 'posts:like-post-view' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name='post_id' value={{obj.id}}>
+                        
+                            <button class="ui button" type="submit">
+                                {% if profile not in obj.liked.all %}
+                                    <i class="heart outline icon " style="font-size:20px !important"></i>
+                                    {{obj.num_likes}}
+                                {% else %}
+                                    <i class="heart icon" style="color:red !important; font-size:20px"></i>
+                                    {{obj.num_likes}}
+                                {% endif %}
+                            </button>
+                        </form> 
+                    </div>
+                    <div>
+                        <i class="comment icon"></i>
+                        <span>{{obj.num_comments}} comments</span>
+                    </div>
+                </div>
+
+                <div class="extra content">
+                    <div class="mb-5">
+
+                    </div>
+                    <div class="comment-box">
+                        {% if obj.comment_set.all%}
+
+                        {%  for c in obj.comment_set.all %}
+                            <div class="ui segment mb-5">
+                                <img  class ="ui avatar image"src={{c.user.avatar.url}}>
+                                <span>{{c.user.user}} - {{obj.created|timesince}} ago</span>
+                                <div class="mt-5">{{c.body}}</div>
+                            </div>
+                        {% endfor %}
+
+                        {%endif%}
+                    </div>
+                </div>
+                <div class="content">
+                    {% if comment_added %}
+                        <div class="ui green message">comment added Successfully</div>
+                    {% endif %}
+                    <form action="" method="POST" class="ui form">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value={{obj.id}}>
+                        {{c_form.as_p}}
+                        <button type="submit" class="ui primary button " name="submit_c_form">Comment</button>
+                    </form>
+
+                </div>
+                
+            </div>
+                
+            {% endfor %}
+        
+        </div>
+        <div class="five wide column">
+            {% if post_added %}
+            <div class="ui green message">Post added Successfully</div>
+            {% endif %}
+            <form action="" method="POST" class="ui form" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{p_form.as_p}}
+
+                <button class="ui button positive" type="submit" name="submit_p_form">
+                    update post
+                </button>
+            
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+    .button:hover .icon{
+        
+            color:red !important;
+        
+    }
+    .content-menu{
+        display:none;
+    }
+    
+    .display-menu{
+        cursor: pointer;
+    }
+</style>
+
+
+
+
+
+{% endblock content%}
+
+

@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{{user}} | disease Detection
+
+{% endblock title %}
+
+{% block content %}
+
+<div class="profile" style="margin-left: 20%;margin-right:20%;">
+    <div class="profile_picture">
+        <img src={{profile.avatar.url}}  style="width:150px;height150px; border-radius:50%" >
+        <button>change profile</button>
+    </div>
+    <div class="user_basic">
+        <div>
+            <h3>{{profile.first_name}} {{profile.last_name}}</h3>
+        </div>
+        <div>
+            {{profile.bio}}
+        </div>
+    </div>
+    <div class="user-details">
+        <span class="left_menu">
+            <span > 
+                <button class="user-details-posts"style="cursor:pointer">
+                    post ( {% if profile.get_posts_no == 0 %}
+                        0
+
+                        {% else %}
+
+                        {{profile.get_posts_no}}
+
+                        {% endif %}
+                    )
+                </button>
+            </span>
+            <span><button class="user-details-about"style="cursor:pointer" >About</button></span> 
+            <span  ><button class="user-details-friends"style="cursor:pointer">friends({{profile.get_friends_no}})</button></span>
+            <span><button class="user-details-photo"style="cursor:pointer" > photo</button></span>
+        </span>
+        <span class="right_menu">
+            <span>
+                <button id ="popup-modal-btn">
+                    <i class="ellipsis vertical icon"></i>
+                </button>
+            </span>
+            <span>
+                <form action="" method="GET">
+                    <span class="ui action left icon input">
+                    <i class="search icon"></i>
+                    <button type='submit' class="ui button"></button>
+                    </span>
+                </form>
+            </span>
+        </span>
+        
+    </div>
+    <div class="user-details-expand" >
+        <span class="user-details-expand-posts">
+            {% if profile.get_posts_no == 0 %}
+                
+                no post yet
+            {% else %}
+
+                <ul>
+                    {% for posts in profile.get_posts %}
+                    <li>
+                        <img src={{posts.image}} >
+                    </li>
+
+                    {% endfor %}
+                </ul>
+
+            {% endif %}
+        </span>
+        <span class="user-details-expand-about">about</span>
+        <span class="user-details-expand-friends">
+            <ul>
+                {% for friend in profile.get_friends %}
+                <li>
+                    {{friend}}
+                </li>
+
+                {% endfor %}
+            </ul>
+
+        </span>
+        <span class="user-details-expand-photo">photo</span>
+
+
+    </div>
+    <div>
+        <!-- POPUP MODEL -->
+        <div class="ui modal mymodal" >
+            <i class="close icon"></i>
+            <div class="header">
+              Update your profile
+            </div>
+            <div class="image content">
+                <div class="ui medium image">
+                    <img src={{profile.avatar.url}}>
+                </div>
+                <div class="description">    
+                    <div class="ui header">Update your profile as your need</div>
+                    <form action="" method="POST" class="ui form" enctype="multipart/form-data">     
+                        {% csrf_token%}
+                        {{form}}
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit" class="ui positive right labeled icon button">
+                    update    
+                    <i class="checkmark icon"></i>
+                </button> 
+                </form>   
+            </div>     
+        </div>
+        {% if confirm %}
+        <div class="ui green message">Your Profile has been succesfully updated </div>
+        {% endif%}
+        
+    </div>
+
+    <script>
+        
+        
+        $(document).ready(function(){
+            //geting value from user-details
+            var posts = $(".user-details-expand-posts");
+            posts.css("border-color","blue");
+            
+            var about = $(".user-details-expand-about");
+            about.hide();
+
+            var friends = $(".user-details-expand-friends");
+            friends.hide();
+            
+            var photo = $(".user-details-expand-photo");
+            photo.hide();
+            
+            
+            // to display post
+            $(".user-details-posts").click(function(){
+                posts.show();
+                
+                
+                post.active();
+                friends.hide();
+                about.hide();
+                photo.hide();
+                
+
+            });
+            
+            //dispaly about
+
+            $(".user-details-about").click(function(){
+                about.show();
+                
+                posts.hide();
+                friends.hide();
+                photo.hide();
+                
+
+            });
+
+
+            //to display friends list
+            
+            $(".user-details-friends").click(function(){
+                friends.show();
+                
+                posts.hide();
+                about.hide();
+                photo.hide();
+
+            });
+
+            //to display photo
+            $(".user-details-photo").click(function(){
+                photo.show();
+                
+                friends.hide();
+                posts.hide();
+                about.hide();
+                
+
+            });
+            
+        });
+    </script>
+    
+
+
+
+
+
+    
+
+
+{% endblock content %}

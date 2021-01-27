@@ -1,0 +1,34 @@
+{%extends 'base.html' %}
+
+{% block title%}
+
+Delete Post
+{% endblock title%}
+
+{% block content%}
+
+    <div class="ui segment">
+        <h3>
+            Delete Post
+        </h3>
+        
+        <form method="POST">
+            {%csrf_token%}
+            <h4>
+                Are you sure want to delete post?
+            </h4>
+
+            <button type="submit" class="ui negative button">
+                yes
+            </button>
+            <button class="ui button primary">
+                <a href="/post">No</a> 
+            </button>
+
+        </form>
+        
+            
+        
+    </div>
+{% endblock content%}
+

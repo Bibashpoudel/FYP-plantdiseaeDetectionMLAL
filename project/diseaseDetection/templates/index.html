@@ -1,0 +1,32 @@
+
+
+
+{% extends 'base.html'%}
+
+{% block content %}
+<link rel="stylesheet" href="../stylesheet/global.css">
+
+
+<form action="add" method="post">
+
+    {% csrf_token %}
+    <div class="log_username">
+        <input type="text" placeholder="phone number or email">
+    </div>
+    <div class="log_pass">
+        <input type="password" placeholder="Password">
+
+    </div>
+    <div>
+        <input type="submit" value="login" class="primary">
+    </div>
+    <div>
+        don't have account? <a href="account/register">Register</a>
+    </div>
+
+</form>
+
+
+
+
+{% endblock%}
