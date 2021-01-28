@@ -39,19 +39,38 @@ Post
                     <p>{{obj.content}}</p>
                     
                     <div class="right floated">
-                        <form action="{% url 'posts:like-post-view' %}" method="POST">
+                        <form action="{% url 'posts:like-post-view' %}" method="POST" class="like-form" id={{obj.id}}>
                             {% csrf_token %}
                             <input type="hidden" name='post_id' value={{obj.id}}>
-                        
-                            <button class="ui button" type="submit">
+                            
+                            <button class="ui button like-btn{{obj.id}} " type="submit">
                                 {% if profile not in obj.liked.all %}
-                                    <i class="heart outline icon " style="font-size:20px !important"></i>
-                                    {{obj.num_likes}}
-                                {% else %}
-                                    <i class="heart icon" style="color:red !important; font-size:20px"></i>
-                                    {{obj.num_likes}}
+                                    <span> Like</span>
+                                <!-- <span class="liked-heart">
+                                        <i class="heart outline icon " style="font-size:20px !important"></i>
+                                        
+                                </span> -->
+                                {% else %} 
+                                <span > Unlike</span>
+                                    <!-- <span class="unliked-heart">
+                                        <i class="heart icon" style="color:red !important; font-size:20px"></i>
+                                        
+                                </span> -->
                                 {% endif %}
-                            </button>
+                            </button>        
+                                    
+                               
+                            
+                            <div class="ui grid">
+                                <div class="column">
+                                    <div class="like-count{{obj.id}}">{{obj.num_likes}}</div>
+
+                                </div>
+                                <div class="column">
+                                    Likes
+                                </div>
+
+                            </div>
                         </form> 
                     </div>
                     <div>
@@ -82,11 +101,11 @@ Post
                     {% if comment_added %}
                         <div class="ui green message">comment added Successfully</div>
                     {% endif %}
-                    <form action="" method="POST" class="ui form">
+                    <form action="" method="POST" class="ui form comment-form" id={{obj.id}}>
                         {% csrf_token %}
                         <input type="hidden" name="post_id" value={{obj.id}}>
-                        {{c_form.as_p}}
-                        <button type="submit" class="ui primary button " name="submit_c_form">Comment</button>
+                        <p class="comment-form{{obj.id}}">{{c_form}}</p>
+                        <button type="submit" class="ui primary button comment-btn{{obj.id}} " name="submit_c_form">Comment</button>
                     </form>
 
                 </div>
@@ -136,5 +155,22 @@ Post
 
 
 {% endblock content%}
+
+
+{% block scripts%}
+
+<script>
+    $(document).ready(function (){
+
+        
+
+        
+
+ 
+    });
+</script>
+
+
+{%endblock scripts%}
 
 

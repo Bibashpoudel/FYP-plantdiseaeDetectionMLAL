@@ -3,6 +3,8 @@ from django.shortcuts import render
 from .models import Profile
 
 from .forms import ProfileModelForm
+
+from posts.models import Post
 # Create your views here.
 
 # def register(request):
@@ -11,6 +13,7 @@ from .forms import ProfileModelForm
 
 def view_my_profile(request):
     profile = Profile.objects.get(user=request.user)
+    post = Post.objects.all()
     form = ProfileModelForm(request.POST or None, request.FILES or None, instance=profile)
     confirm = False
 
@@ -20,6 +23,7 @@ def view_my_profile(request):
             confirm = True
     context = {
         'profile' : profile,
+        'post':post,
         'form': form,
         'confirm': confirm
     }

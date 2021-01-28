@@ -63,18 +63,10 @@
                 
                 no post yet
             {% else %}
-
-                <ul>
-                    {% for posts in profile.get_posts %}
-                    <li>
-                        <img src={{posts.image}} >
-                    </li>
-
-                    {% endfor %}
-                </ul>
-
-            {% endif %}
-        </span>
+        </span>    
+            
+            {%endif%}
+        
         <span class="user-details-expand-about">about</span>
         <span class="user-details-expand-friends">
             <ul>

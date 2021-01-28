@@ -45,8 +45,8 @@ class Comment(models.Model):
         return str(self.pk)
 
 LOVE_CHOCIES =(
-    ('like', 'like'),
-    ('unlike', 'unlike'),
+    ('like', 'Like'),
+    ('unlike', 'Unlike'),
 
 )
 

@@ -8,6 +8,7 @@ from . forms import PostModelForm, CommentModelForm
 
 from django.views.generic import UpdateView, DeleteView
 from django.contrib import messages
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -39,7 +40,7 @@ def post_comment_loves_view(request):
             post_added = True
 
     if 'submit_c_form' in request.POST:
-        print(request.POST)
+        
         
         c_form = CommentModelForm(request.POST)
         if c_form.is_valid():
@@ -47,7 +48,7 @@ def post_comment_loves_view(request):
             instance.user = profile
             instance.post = Post.objects.get(id = request.POST.get('post_id'))
             instance.save()
-            print("bibash")
+            
             c_form = CommentModelForm()
             comment_added = True
 
@@ -66,7 +67,7 @@ def like_unlike_post(request):
     user = request.user
     if request.method == 'POST':
         post_id = request.POST.get('post_id')
-        post_obj = Post.objects.get(id = post_id)
+        post_obj = Post.objects.get(id=post_id)
         profile = Profile.objects.get(user = user)
 
 
@@ -80,14 +81,20 @@ def like_unlike_post(request):
 
         if not created:
             if like.value =='Like':
-                like.value ='unlike'  
+                like.value ='Unlike'  
             else:
-                like.value ='like'
+                like.value ='Like'
         else:
-            like.value='like'
+            like.value='Like'
 
             post_obj.save()
-            like.save()        
+            like.save() 
+
+        data ={
+            'value': like.value,
+            'likes':post_obj.liked.all().count()
+        }   
+        return JsonResponse(data, safe=False)        
 
     return redirect('posts:main-post-view')
 
