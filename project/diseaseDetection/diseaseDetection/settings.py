@@ -38,10 +38,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
+    # for django allauth
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+
+
+
+
+
     'account',
     'userManagement',
     'posts',
 ]
+
+# LOGIN_URL = '/admin/'
+
+LOGIN_REDIRECT_URL = '/posts'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,12 +67,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+SITE_ID = 1
+
 ROOT_URLCONF = 'diseaseDetection.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +86,16 @@ TEMPLATES = [
         },
     },
 ]
+
+# AUTHENTICATION_BACKENDS = [
+
+#     # Needed to login by username in Django admin, regardless of `allauth`
+#     'django.contrib.auth.backends.ModelBackend',
+
+#     # `allauth` specific authentication methods, such as login by e-mail
+#     'allauth.account.auth_backends.AuthenticationBackend',
+
+# ]
 
 WSGI_APPLICATION = 'diseaseDetection.wsgi.application'
 
@@ -84,7 +110,7 @@ DATABASES = {
     }
 }
 
-# mysql database for data storing 
+# mysql database for data storing
 
 # clea
 
@@ -131,7 +157,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_project')
 ]
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
+STATIC_ROOT = os.path.join(os.path.dirname(
+    BASE_DIR), "static_cdn", "static_root")
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
+MEDIA_ROOT = os.path.join(os.path.dirname(
+    BASE_DIR), "static_cdn", "media_root")

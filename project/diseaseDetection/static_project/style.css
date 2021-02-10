@@ -1,19 +1,25 @@
-body{
-    background: #a1a1a1 !important;
-    margin-top:10px;
+html {
+  font-size: 80%;
+  box-sizing: border-box;
+}
+body {
+  font: helvetica, roboto;
+  margin: 0;
+  height: 100vh;
+}
+.body-container {
+  height: 100%;
 }
 
-.nav{
-    border-radius: 0px !important;
-    background-color:#232f3e !important;
-    
+.nav {
+  background-color: red !important;
 }
-
+.nav a {
+  color: #203040 !important;
+}
 
 /* for update form in my profile page */
 
-        
-        
-.mymodal{
-    height:300px !important;
+.mymodal {
+  height: 300px !important;
 }

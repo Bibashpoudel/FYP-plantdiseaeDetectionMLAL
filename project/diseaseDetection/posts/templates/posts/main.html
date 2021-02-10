@@ -104,8 +104,9 @@ Post
                     <form action="" method="POST" class="ui form comment-form" id={{obj.id}}>
                         {% csrf_token %}
                         <input type="hidden" name="post_id" value={{obj.id}}>
+                        <input type = "text" name="comment" value={obj.id}>
                         <p class="comment-form{{obj.id}}">{{c_form}}</p>
-                        <button type="submit" class="ui primary button comment-btn{{obj.id}} " name="submit_c_form">Comment</button>
+                        <button type="submit" class="ui primary button  " name="submit_c_form">Comment</button>
                     </form>
 
                 </div>
@@ -157,20 +158,5 @@ Post
 {% endblock content%}
 
 
-{% block scripts%}
-
-<script>
-    $(document).ready(function (){
-
-        
-
-        
-
- 
-    });
-</script>
-
-
-{%endblock scripts%}
 
 

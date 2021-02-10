@@ -23,25 +23,51 @@
   </head>
   <body>
     
-    <div>
+    <div class="body-container">
+      <div>
         {% include 'main/navbar.html'%}
-    </div>
+      </div>
     
-    <div class="ui container">
-      {% block content %}
-      {% endblock content %}
-    </div>
+      <div class="ui container">
+        {% block content %}
+        {% endblock content %}
+      </div>
 
-    {% block scripts %}
-    {% endblock scripts %}
+     
 
-    <div>
-      {% include 'main/footer.html'%}
+      <div>
+        {% include 'main/footer.html'%}
+      </div>
     </div>
    
    <!-- custom js -->
 
    <script type="text/javascript" src={% static 'main.js' %}></script>
+
+   <style>
+      html {
+        font-size: 80%;
+        box-sizing: border-box;
+      }
+      body {
+        font: helvetica, roboto;
+        margin: 0;
+        height: 100vh;
+        background-color:whitesmoke;
+      }
+      .body-container {
+        font-size:18px  !important;
+        display:grid;
+      grid-template-areas:
+      "header"
+      "main"
+      "footer";
+      grid-template-columns: 1fr;
+      grid-template-rows: 5rem 1fr 5rem ;
+      height: 100%
+      }
+   </style>
+   
 
   </body>
 </html>

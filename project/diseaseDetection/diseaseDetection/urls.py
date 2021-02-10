@@ -21,10 +21,14 @@ from .views import home_view
 
 urlpatterns = [
     #path('', include('userManagement.urls')),
+
+    #path('accounts/', include('allauth.urls')),
+
     path('admin/', admin.site.urls),
     path('', home_view, name="home_view"),
     path('account', include('account.urls', namespace='account')),
-    path('post', include('posts.urls',namespace='posts')),
+    path('posts', include('posts.urls', namespace='posts')),
+
 ]
 
 

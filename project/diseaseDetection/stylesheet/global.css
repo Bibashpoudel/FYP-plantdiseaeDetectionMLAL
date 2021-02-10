@@ -1,14 +1,16 @@
-html{
-    font: 65.2%;
-    height:100%;
+/* html {
+  font-size: 65.2%;
+  box-sizing: border-box;
 }
-body{
-    font: helvetica, roboto;
-    height:100%;
+body {
+  font: helvetica, roboto;
+  margin: 0;
+  height: 100vh;
 }
+.body-container {
+  height: 100%;
+} */
 
-.primary{
-    background-color:#89d1fe;
+.primary {
+  background-color: #89d1fe;
 }
-
-

@@ -79,13 +79,15 @@ $(document).ready(function(){
         e.preventDefault();
         console.log("working")
 
-        const post_id = $(this).attr('id')
-        console.log(post_id);
-         
 
-       const comment = $(`.comment-form${post_id}`)
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                'post_id': post_id,   
+            },
         
-        console.log(comment)
         
     });
 
